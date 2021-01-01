@@ -10,7 +10,7 @@
     4. Anaconda3 Pytorch, Tensorflow 환경 세팅
     5. 테스트
 
-2. 우분투 + Docker를 활용한 학습 환경 설정 법
+2. 우분투 + Docker를 활용한 원격 학습 환경 설정 법
     1. 우분투 설치
     2. 우분투 기초 설정 
     3. Docker 설치
