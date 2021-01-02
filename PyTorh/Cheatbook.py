@@ -24,7 +24,7 @@ t = torch.randn(3,5)
 t.size()
 
 # numpy를 사용하여 ndarray로 변환
-t = torch.tensro([[1,2],[3,4]])
+t = torch.tensor([[1,2],[3,4]])
 x = t.numpy()
 
 # GPU 상의 텐서는 to 메서드로  CPU 텐서로 변환 후 ndarray로 변환해야함
@@ -33,14 +33,14 @@ x = t.to("cpu").numpy()
 
 x = torch.linspace(0,10,5)
 y = torch.exp(x)
-plt.plot(x.numpy(),y.numpy())
+# plt.plot(x.numpy(),y.numpy())
 
 
 ##
 ## 텐서의 인덱싱
 ##
 
-t = torch.tensor([1,2,3],[4,5,6.])
+t = torch.tensor([[1,2,3],[4,5,6.]])
 
 # 인덱스 접근
 t[0, 2]
