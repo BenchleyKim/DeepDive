@@ -6,16 +6,16 @@
 * https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md 에서 1.4.0의 MSI와 펌웨어 파일을 받는다.
 * MSI 바로 실행해서 설치 
 * 키넥트는 초기 펌웨어를 가지고 있기 떄문에 펌웨어 업데이트를 진행한다. 
-* SDK설치 위치(보통 C:\\User\Program Files\Azure Kinect SDK v1.4.1)\tools\ 로 접근하면 AzureKinectFrimwareTool.exe와 firmware 폴더가 있는데가 있는데 
-* 다운받은 AzureKinectDK_Fw_1.5.926614.bin. 를 firmware 폴더에 넣는다
+* SDK설치 위치`(보통 C:\\User\Program Files\Azure Kinect SDK v1.4.1)\tools\` 로 접근하면 `AzureKinectFrimwareTool.exe`와 `firmware` 폴더가 있는데가 있는데 
+* 다운받은 `AzureKinectDK_Fw_1.5.926614.bin.` 를 `firmware` 폴더에 넣는다
 * 키넥트를 연결하고 명령 프롬프트에 다음 명령어 입력   
 `
  AzureKinectFirmwareTool.exe -u 펌웨어 파일 이름 
 `   
 
 ## 2. 설치 확인   
-* SDK설치 위치(보통 C:\Program Files\Azure Kinect SDK v1.4.1)\tools\ 에 있는 `k4aviewer.exe` 실행 
-* Open Device 선택하고 > Start
+* SDK설치 위치`(보통 C:\Program Files\Azure Kinect SDK v1.4.1)\tools\` 에 있는 `k4aviewer.exe` 실행 
+* `Open Device` 선택하고  `Start` 버튼 클릭 
 * 실행이 잘되는지 확인한다. 
 * 다음으로 Body Tracking SDK를 설치한다. 
 
@@ -31,16 +31,15 @@
 * https://docs.microsoft.com/en-us/azure/kinect-dk/body-sdk-download 에서 원하는 버전 msi 다운로드
 * msi 파일 실행해서 설치 완료 
 ## 6. 설치 확인 
-* 설치 위치 (보통 C:\Program Files\Azure Kinect Body Tracking SDK)\tools\ 에 접근
+* 설치 위치 `(보통 C:\Program Files\Azure Kinect Body Tracking SDK)\tools\` 에 접근
 * cmd 경로에서 `k4abt_simple_3d_viewer.exe` 입력해서 실행   ( 단 `k4aviewer.exe` 이 켜져 있으면 실행 안됨) 
-* 만약 안되면 GPU 문제이기 때문에 cmd에  `k4abt_simple_3d_viewer.exe CPU` 입력해서 실행 확인 
+* 만약 안되면 GPU 문제이기 때문에 cmd에  `k4abt_simple_3d_viewer.exe CPU` 입력해서 CPU 버전 실행 확인 
 
 ## 7. 개발을 위한 VS에 키넥트 라이브러리 추가
 * 빈 프로젝트 생성 `새 프로젝트 만들기 > c++ 콘솔 앱 ` 추천 
 * NuGet package 설치 `[참조링크] : https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio `  
 * 패키지 매니저 UI에서 우클릭해서 References 에 Manage NuGet Packages 를 클릭한다.
-* Browse 탭에서 nuget.org 를 선택해 Microsoft.Azure.Kinect를 검색해서 Sensor와 Body Tracking 라이브러리를 추가해준다.
-* Source 폴더에 새 c 파일을 만들어주고 개발을 시작한다. 
+* Browse 탭에서 nuget.org 를 선택해 `Microsoft.Azure.Kinect`를 검색해서 Sensor와 Body Tracking 라이브러리를 추가해준다.
 
 ## 8. 라이브러리 추가 확인 
 * 소스파일에 `main.c` 파일 생성해 주고 다음 코드 입력 (해당 코드는 제품 번호를 출력하고 종료되는 코드이다. )
