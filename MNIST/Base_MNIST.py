@@ -50,7 +50,7 @@ class OutputLayer(BaseLayer):
         self.grad_w = np.dot(self.x.T, delta)
         self.grad_b = np.sum(delta, axis = 0)
         self.grad_x = np.dot(delta, self.w.T)
-
+# 
 
 digits_data = datasets.load_digits()
 input_data = np.asarray(digits_data.data)
