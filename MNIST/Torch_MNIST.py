@@ -60,3 +60,41 @@ optimizer = torch.optim.SGD(model.parameters(), lr = 0.01, momentum= 0.5)
 criterion = nn.CrossEntropyLoss()
 
 print(model)
+
+
+def train(model, train_loader, optimizer, log_interval) :
+    model.train()
+    for batch_idx,(image, label) in enumerate(train_loader):
+        image = image.to(DEVICE)
+        label = label.to(DEVICE)
+        optimizer.zero_grad()
+        output = model(image)
+        loss = criterion(output, label)
+        loss.backward()
+        optimizer.step()
+
+        if batch_idx % log_interval == 0 :
+            print("Train Epoch : {} [{}/{} ({:.0f}%)]\tTrain Loss : {:.6f}".format(EPOCHS,batch_idx * len(image),
+            len(train_loader.dataset),100. * batch_idx / len(train_loader), loss.item()))
+
+def evaluate(model, test_loader):
+    model.eval()
+    test_loss = 0
+    correct = 0
+
+    with torch.no_grad():
+        for image , label in test_loader:
+            image = image.to(DEVICE)
+            label = label.to(DEVICE)
+            output = model(image)
+            test_loss += criterion(output, label).item()
+            prediction = output.max(1, keepdim = True)[1]
+            correct += prediction.eq(label.view_as(prediction)).sum().item()
+    test_loss /= len(test_loader.dataset)
+    test_accuracy = 100. * correct / len(test_loader.dataset)
+    return  test_loss, test_accuracy
+
+for Epoch in range(1, EPOCHS+1):
+    train(model, train_loader, optimizer, log_interval = 200)
+    test_loss, test_accuracy = evaluate(model, test_loader)
+    print("\n[EPOCH:{}], \tTest Loss:{:.4f}, \t Test Accuracy:{:.2f}%\n".format(Epoch,test_loss,test_accuracy))
