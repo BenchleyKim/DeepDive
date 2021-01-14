@@ -15,7 +15,7 @@ print("Using PyTorch Version", torch.__version__, ' Device : ', DEVICE)
 
 # 학습 관련 파라미터 값들 
 
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 EPOCHS = 10 
 
 train_dataset = datasets.MNIST(root='../data/MNIST', train = True, 
@@ -46,6 +46,7 @@ class Net(nn.Module):
         self.fc1 = nn.Linear(28 * 28, 512)
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 10)
+        
     def forward(self, x):
         x = x.view(-1 ,28 * 28)
         x = self.fc1(x)
