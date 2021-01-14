@@ -39,3 +39,24 @@ for i in range(10):
     plt.axis('off')
     plt.imshow(X_train[i,:,:,:].numpy().reshape(28,28), cmap= "gray_r")
     plt.title('Class : '+ str(y_train[i].item()))
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net,self).__init__()
+        self.fc1 = nn.Linear(28 * 28, 512)
+        self.fc2 = nn.Linear(512, 256)
+        self.fc3 = nn.Linear(256, 10)
+    def forward(self, x):
+        x = x.view(-1 ,28 * 28)
+        x = self.fc1(x)
+        x = F.sigmoid(x)
+        x = self.fc2(x)
+        x = F.sigmoid(x)
+        x = F.log_softmax(x, dim = 1)
+        return x 
+
+model = Net().to(DEVICE)
+optimizer = torch.optim.SGD(model.parameters(), lr = 0.01, momentum= 0.5)
+criterion = nn.CrossEntropyLoss()
+
+print(model)
