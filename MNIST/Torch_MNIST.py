@@ -53,6 +53,7 @@ class Net(nn.Module):
         x = F.sigmoid(x)
         x = self.fc2(x)
         x = F.sigmoid(x)
+        x = self.fc3(x)
         x = F.log_softmax(x, dim = 1)
         return x 
 
