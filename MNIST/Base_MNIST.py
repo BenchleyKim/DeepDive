@@ -120,7 +120,7 @@ for i in range(epochs) :
     error_record_test.append(error_test)
 
     if i%interval ==0:
-        print("Epoch : " + str(i+1)+ '/'+str(epochs), "  Error_Train : "+str(error_train) + "Error_Test : " 
+        print("Epoch : " + str(i+1)+ '/'+str(epochs), "  Error_Train : "+str(error_train) + "   Error_Test : " 
         + str(error_test) )
 
 plt.plot(range(1, len(error_record_train)+1), error_record_train, label="Train")
