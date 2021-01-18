@@ -48,47 +48,47 @@ for i in range(10):
     plt.title('Class: ' + str(y_train[i].item()))
 
 
-class Net(nn.Module):
+class CNN(nn.Module):
     def __init__(self):
-        super(Net, self).__init__()
-        self.fc1 = nn.Linear(32 * 32 * 3, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256,10)
-        self.dropout_prob = 0.5
-        self.batch_norm1 = nn.BatchNorm1d(512)
-        self.batch_norm2 = nn.BatchNorm1d(256)
+        super(CNN,self).__init__()
+        self.conv1 = nn.Conv2d(
+            in_channels=3,
+            out_channels=8,
+            kernel_size=3,
+            padding=1
+        )
+        self.conv2 = nn.Conv2d(
+            in_channels= 8 ,
+            out_channels= 16,
+            kernel_size= 3,
+            padding= 1
 
-    def forward(self, x):
-        x = x.view(-1, 32 * 32 * 3)
+        )
+        self.pool = nn.MaxPool2d(kernel_size=2,
+        stride = 2)
+
+        self.fc1 = nn.Linear(8*8*16, 64)
+        self.fc2 = nn.Linear(64, 32)
+        self.fc3 = nn.Linear(32,10)
+    def forward(self,x):
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.pool(x)
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.pool(x)
+
+        x = x.view(-1, 8*8*16)
         x = self.fc1(x)
-        x = self.batch_norm1(x)
         x = F.relu(x)
-        x = F.dropout(x, training = self.training, p = self.dropout_prob)
         x = self.fc2(x)
-        x = self.batch_norm2(x)
         x = F.relu(x)
-        x = F.dropout(x, training = self.training, p = self.dropout_prob)
         x = self.fc3(x)
-        x = F.log_softmax(x, dim = 1)
+        x = F.log_softmax(x)
         return x
-# class Net(nn.Module):
-#     def __init__(self):
-#         super(Net, self).__init__()
-#         self.fc1 = nn.Linear(32 * 32 * 3, 512)
-#         self.fc2 = nn.Linear(512, 256)
-#         self.fc3 = nn.Linear(256, 10)
 
-#     def forward(self, x):
-#         x = x.view(-1, 32 * 32 * 3)
-#         x = self.fc1(x)
-#         x = F.relu(x)
-#         x = self.fc2(x)
-#         x = F.relu(x)
-#         x = self.fc3(x)
-#         x = F.log_softmax(x, dim = 1)
-#         return x 
 
-model = Net().to(DEVICE)
+model = CNN().to(DEVICE)
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
 criterion = nn.CrossEntropyLoss()
 
