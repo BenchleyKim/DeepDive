@@ -115,7 +115,7 @@ def evalutate(model, test_loader) :
 
 
 for epoch in range(1,EPOCHS+1):
-    traing(model, train_loader, optimizer, log_interval = 200)
+    train(model, train_loader, optimizer, log_interval = 200)
     test_loss, real_image, gen_image = evalutate(model, test_loader)
     print("\n[EPOCH: {}], \tTest Loss: {:.4f}".format(epoch, test_loss))
     f, a = plt.subplots(2, 10, figsize = (10, 4))
