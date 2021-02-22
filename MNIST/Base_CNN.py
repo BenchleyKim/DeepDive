@@ -48,7 +48,7 @@ for i in range(10):
     plt.title('Class: ' + str(y_train[i].item()))
 
 
-class CNN(nn.Module):
+class Lenet5(nn.Module):
     def __init__(self):
         super(CNN,self).__init__()
         self.conv1 = nn.Conv2d(
@@ -92,14 +92,14 @@ class CNN(nn.Module):
         x = self.F6(x)
         x = F.tanh(x)
 
-        # F6 2 OUTPUT
+        # F6 2 OUTPUT -> 구현 실패 
         x = self.output(x)
         x = F.log_softmax(x)
 
         return x
 
 
-model = CNN().to(DEVICE)
+model = Lenet5().to(DEVICE)
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.0005)
 scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer= optimizer,milestones=[3,5,8,12] , gamma=0.2)
 criterion = nn.CrossEntropyLoss()
