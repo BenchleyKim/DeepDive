@@ -13,8 +13,8 @@ else :
 
 print('Using PyTorch version:', torch.__version__, ' Device:', DEVICE)
 
-BATCH_SIZE = 32
-EPOCHS = 100
+BATCH_SIZE = 64
+EPOCHS = 20
 
 train_dataset = datasets.MNIST(root = "../data/MNIST",
                                       train = True,
@@ -100,8 +100,8 @@ class CNN(nn.Module):
 
 
 model = CNN().to(DEVICE)
-optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
-scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer= optimizer,milestones=[30,50,80,96] , gamma=0.2)
+optimizer = torch.optim.Adam(model.parameters(), lr = 0.0005)
+scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer= optimizer,milestones=[3,5,8,12] , gamma=0.2)
 criterion = nn.CrossEntropyLoss()
 
 print(model)
@@ -117,12 +117,13 @@ def train(model, train_loader, optimizer, log_interval):
         loss = criterion(output, label)
         loss.backward()
         optimizer.step()
-        scheduler.step()
+        
         if batch_idx % log_interval == 0:
             print("Train Epoch: {} [{}/{} ({:.0f}%)]\tTrain Loss: {:.6f}".format(
                 epoch, batch_idx * len(image), 
                 len(train_loader.dataset), 100. * batch_idx / len(train_loader), 
                 loss.item()))
+    scheduler.step()
 
 def evaluate(model, test_loader):
     model.eval()
