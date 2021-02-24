@@ -24,3 +24,7 @@ PyTorh/.vscode/settings.json
 MNIST/.vscode/settings.json
 MNIST/.ipynb_checkpoints/Untitled-checkpoint.ipynb
 MNIST/Untitled.ipynb
+
+# 데이터 파일
+DACON/Month13/data/*
+DACON/Month13/.ipynb_checkpoints/Untitled-checkpoint.ipynb
