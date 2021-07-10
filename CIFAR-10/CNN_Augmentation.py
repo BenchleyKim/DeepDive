@@ -15,7 +15,7 @@ print('Using PyTorch version:', torch.__version__, ' Device:', DEVICE)
 
 BATCH_SIZE = 32
 EPOCHS = 10
-
+ 
 train_dataset = datasets.CIFAR10(root = "../data/CIFAR_10",
                                       train = True,
                                       download = True,
